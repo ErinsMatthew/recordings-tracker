@@ -11,7 +11,7 @@ class Program(models.Model):
     name = models.CharField(max_length=128)
 
     def __str__(self):
-        return utils.object_to_json(self)
+        return self.name
 
 
 class Location(models.Model):
@@ -19,7 +19,7 @@ class Location(models.Model):
     city = models.CharField(max_length=128)
 
     def __str__(self):
-        return utils.object_to_json(self)
+        return f"{self.name} ({self.city})"
 
 
 class Season(models.Model):
@@ -32,7 +32,7 @@ class Season(models.Model):
     sequence = models.PositiveSmallIntegerField(null=True)
 
     def __str__(self):
-        return utils.object_to_json(self)
+        return self.name
 
 
 class SeasonGroup(models.Model):
@@ -42,7 +42,7 @@ class SeasonGroup(models.Model):
     has_erin = models.BooleanField(default=False)
 
     def __str__(self):
-        return utils.object_to_json(self)
+        return f"{self.name} - {self.season.name}"
 
 
 class Show(models.Model):
@@ -55,7 +55,7 @@ class Show(models.Model):
     sequence = models.PositiveSmallIntegerField(null=True)
 
     def __str__(self):
-        return utils.object_to_json(self)
+        return self.name
 
 
 class Platform(models.Model):
@@ -63,7 +63,7 @@ class Platform(models.Model):
     url_pattern = models.CharField(max_length=256)
 
     def __str__(self):
-        return utils.object_to_json(self)
+        return self.name
 
 
 class ShowPlatform(models.Model):
@@ -82,7 +82,7 @@ class EquipmentType(models.Model):
     name = models.CharField(max_length=128)
 
     def __str__(self):
-        return utils.object_to_json(self)
+        return self.name
 
 
 class Equipment(models.Model):
@@ -90,7 +90,7 @@ class Equipment(models.Model):
     type = models.ForeignKey(EquipmentType, on_delete=models.CASCADE)
 
     def __str__(self):
-        return utils.object_to_json(self)
+        return f"{self.name} ({self.type})"
 
 
 class ShowEquipment(models.Model):
@@ -108,7 +108,7 @@ class FileType(models.Model):
     name = models.CharField(max_length=128)
 
     def __str__(self):
-        return utils.object_to_json(self)
+        return self.name
 
 
 class ShowFile(models.Model):
@@ -137,7 +137,7 @@ class Song(models.Model):
     artist = models.CharField(max_length=128)
 
     def __str__(self):
-        return utils.object_to_json(self)
+        return f"{self.name} ({self.artist})"
 
 
 class ShowSong(models.Model):
@@ -148,7 +148,7 @@ class ShowSong(models.Model):
     start_seconds = models.PositiveSmallIntegerField(null=True)
 
     def __str__(self):
-        return utils.object_to_json(self)
+        return self.show.name
     
     class Meta:
         unique_together = ["show", "song"]
