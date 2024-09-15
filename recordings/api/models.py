@@ -1,3 +1,4 @@
+from api import utils
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
@@ -10,7 +11,7 @@ class Program(models.Model):
     name = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.name
+        return utils.object_to_json(self)
 
 
 class Location(models.Model):
@@ -18,7 +19,7 @@ class Location(models.Model):
     city = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.name
+        return utils.object_to_json(self)
 
 
 class Season(models.Model):
@@ -31,30 +32,30 @@ class Season(models.Model):
     sequence = models.PositiveSmallIntegerField(null=True)
 
     def __str__(self):
-        return self.name
+        return utils.object_to_json(self)
 
 
 class SeasonGroup(models.Model):
     season = models.ForeignKey(Season, on_delete=models.CASCADE)
-    group_name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128)
     has_tristan = models.BooleanField(default=True)
     has_erin = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.group_name
+        return utils.object_to_json(self)
 
 
 class Show(models.Model):
     name = models.CharField(max_length=128)
     season_group = models.ForeignKey(SeasonGroup, on_delete=models.CASCADE)
-    show_date = models.DateField()
+    date = models.DateField()
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    was_recorded = models.BooleanField(default=False)
+    recorded = models.BooleanField(default=False)
     comments = models.CharField(max_length=4096)
     sequence = models.PositiveSmallIntegerField(null=True)
 
     def __str__(self):
-        return self.name
+        return utils.object_to_json(self)
 
 
 class Platform(models.Model):
@@ -62,7 +63,7 @@ class Platform(models.Model):
     url_pattern = models.CharField(max_length=256)
 
     def __str__(self):
-        return self.name
+        return utils.object_to_json(self)
 
 
 class ShowPlatform(models.Model):
@@ -71,7 +72,7 @@ class ShowPlatform(models.Model):
     key = models.CharField(max_length=64)
 
     def __str__(self):
-        return self.platform.name
+        return utils.object_to_json(self)
 
     class Meta:
         unique_together = ["show", "platform"]
@@ -81,7 +82,7 @@ class EquipmentType(models.Model):
     name = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.name
+        return utils.object_to_json(self)
 
 
 class Equipment(models.Model):
@@ -89,16 +90,15 @@ class Equipment(models.Model):
     type = models.ForeignKey(EquipmentType, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return utils.object_to_json(self)
 
 
 class ShowEquipment(models.Model):
     show = models.ForeignKey(Show, on_delete=models.CASCADE)
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
-    # recording_key = models.CharField(max_length=64)
 
     def __str__(self):
-        return self.show
+        return utils.object_to_json(self)
 
     class Meta:
         unique_together = ["show", "equipment"]
@@ -108,7 +108,7 @@ class FileType(models.Model):
     name = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.name
+        return utils.object_to_json(self)
 
 
 class ShowFile(models.Model):
@@ -123,10 +123,10 @@ class ShowFile(models.Model):
     )  # see PATH_MAX in <linux/limits.h>
     icloud_url = models.URLField()
     file_size = models.PositiveIntegerField()
-    file_metadata_json = models.JSONField()
+    file_stats_json = models.JSONField()
 
     def __str__(self):
-        return self.full_path
+        return utils.object_to_json(self)
 
 
 class Song(models.Model):
@@ -134,7 +134,7 @@ class Song(models.Model):
     artist = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.name
+        return utils.object_to_json(self)
 
 
 class ShowSong(models.Model):
@@ -145,4 +145,4 @@ class ShowSong(models.Model):
     start_seconds = models.PositiveSmallIntegerField(null=True)
 
     def __str__(self):
-        return self.show
+        return utils.object_to_json(self)

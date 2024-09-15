@@ -84,7 +84,7 @@ class ShowViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
 
-    queryset = Show.objects.all().order_by("show_date")
+    queryset = Show.objects.all().order_by("date")
     serializer_class = ShowSerializer
     permission_classes = [permissions.IsAuthenticated]
 
