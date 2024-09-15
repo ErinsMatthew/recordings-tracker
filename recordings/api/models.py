@@ -128,6 +128,9 @@ class ShowFile(models.Model):
     def __str__(self):
         return utils.object_to_json(self)
 
+    class Meta:
+        unique_together = ["show", "full_path"]
+
 
 class Song(models.Model):
     name = models.CharField(max_length=128)
@@ -146,3 +149,6 @@ class ShowSong(models.Model):
 
     def __str__(self):
         return utils.object_to_json(self)
+    
+    class Meta:
+        unique_together = ["show", "song"]
