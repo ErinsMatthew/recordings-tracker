@@ -45,7 +45,7 @@ class SeasonGroup(models.Model):
 
 
 class Show(models.Model):
-    show_name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128)
     season_group = models.ForeignKey(SeasonGroup, on_delete=models.CASCADE)
     show_date = models.DateField()
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
@@ -54,15 +54,15 @@ class Show(models.Model):
     sequence = models.PositiveSmallIntegerField(null=True)
 
     def __str__(self):
-        return self.show_name
+        return self.name
 
 
 class Platform(models.Model):
-    platform_name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128)
     url_pattern = models.CharField(max_length=256)
 
     def __str__(self):
-        return self.platform_name
+        return self.name
 
 
 class ShowPlatform(models.Model):
@@ -71,31 +71,31 @@ class ShowPlatform(models.Model):
     key = models.CharField(max_length=64)
 
     def __str__(self):
-        return self.platform_name
+        return self.platform.name
 
     class Meta:
         unique_together = ["show", "platform"]
 
 
 class EquipmentType(models.Model):
-    equipment_type_name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.equipment_type_name
+        return self.name
 
 
 class Equipment(models.Model):
-    equipment_name = models.CharField(max_length=128)
-    equipment_type = models.ForeignKey(EquipmentType, on_delete=models.CASCADE)
+    name = models.CharField(max_length=128)
+    type = models.ForeignKey(EquipmentType, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.equipment_name
+        return self.name
 
 
 class ShowEquipment(models.Model):
     show = models.ForeignKey(Show, on_delete=models.CASCADE)
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
-    recording_key = models.CharField(max_length=64)
+    # recording_key = models.CharField(max_length=64)
 
     def __str__(self):
         return self.show
@@ -105,13 +105,14 @@ class ShowEquipment(models.Model):
 
 
 class FileType(models.Model):
-    file_type_name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.file_type_name
+        return self.name
 
 
 class ShowFile(models.Model):
+    show = models.ForeignKey(Show, on_delete=models.CASCADE)
     full_path = models.CharField(max_length=4096)  # see PATH_MAX in <linux/limits.h>
     base_name = models.CharField(max_length=4096)
     file_type = models.ForeignKey(FileType, on_delete=models.CASCADE)
@@ -129,11 +130,11 @@ class ShowFile(models.Model):
 
 
 class Song(models.Model):
-    song_name = models.CharField(max_length=128)
-    artist_name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128)
+    artist = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.song_name
+        return self.name
 
 
 class ShowSong(models.Model):
