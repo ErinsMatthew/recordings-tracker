@@ -16,3 +16,7 @@ $ python -m venv .
 $ . .venv/bin/activate
 (.venv) $ python -m pip install -r requirements.txt 
 ```
+
+# Initial Data
+
+[Loading initial data](https://docs.djangoproject.com/en/5.1/howto/initial-data/)

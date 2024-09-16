@@ -67,6 +67,8 @@ htmlcov/
 nosetests.xml
 coverage.xml
 
+initial_data.yaml
+
 # Translations
 *.mo
 *.pot

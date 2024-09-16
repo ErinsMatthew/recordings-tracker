@@ -126,7 +126,7 @@ class ShowFile(models.Model):
     file_stats_json = models.JSONField()
 
     def __str__(self):
-        return utils.object_to_json(self)
+        return self.full_path
 
     class Meta:
         unique_together = ["show", "full_path"]
@@ -146,6 +146,7 @@ class ShowSong(models.Model):
     has_tristan = models.BooleanField(default=False)
     has_erin = models.BooleanField(default=False)
     start_seconds = models.PositiveSmallIntegerField(null=True)
+    sequence = models.PositiveSmallIntegerField(null=True)
 
     def __str__(self):
         return self.show.name
