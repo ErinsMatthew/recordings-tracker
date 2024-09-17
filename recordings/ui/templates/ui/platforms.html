@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <h2>Platforms</h2>
+
+    {% if platforms %}
+    <ul>
+        {% for platform in platforms %}
+        <li>{{ platform.name }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>

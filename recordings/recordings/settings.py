@@ -29,6 +29,9 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 
 SHOWFILES_LOCAL_BASE_DIR = config("SHOWFILES_LOCAL_BASE_DIR")
 
+USERID = config("USERID")
+PASSWORD = config("PASSWORD")
+
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "api.apps.ApiConfig",
+    "ui.apps.UiConfig",
 ]
 
 REST_FRAMEWORK = {
