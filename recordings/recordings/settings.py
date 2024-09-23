@@ -29,7 +29,10 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 
 SHOWFILES_LOCAL_BASE_DIR = config("SHOWFILES_LOCAL_BASE_DIR")
 
-USERID = config("USERID")
+API_BASE_URL = config("API_BASE_URL")
+UI_BASE_URL = config("UI_BASE_URL")
+
+USER_ID = config("USER_ID")
 PASSWORD = config("PASSWORD")
 
 ALLOWED_HOSTS = []
