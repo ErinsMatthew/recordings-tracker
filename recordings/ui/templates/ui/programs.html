@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <h2>Programs</h2>
+
+    {% if programs %}
+    <ul>
+        {% for program in programs %}
+        <li><a href="{% url 'program' program.id %}">{{ program.name }}</li></a>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>
