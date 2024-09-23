@@ -1,15 +1,21 @@
-import requests
-
 from django.shortcuts import render
 
-from django.conf import settings
+from ui import services
 
 
 def index(request):
-    response = requests.get(
-        "http://127.0.0.1:8000/platforms/", auth=(settings.USERID, settings.PASSWORD)
-    )
+    programs_list = services.get_programs()
 
-    platforms = response.json()["results"]
+    return render(request, "ui/programs.html", programs_list)
 
-    return render(request, "ui/platforms.html", {"platforms": platforms})
+
+def programs(request):
+    programs_list = services.get_programs()
+
+    return render(request, "ui/programs.html", programs_list)
+
+
+def program(request, id):
+    program_dict = services.get_program(id)
+
+    return render(request, "ui/program.html", program_dict)
