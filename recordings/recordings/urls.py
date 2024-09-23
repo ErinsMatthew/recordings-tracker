@@ -29,5 +29,7 @@ router.register(r"show_songs", apiviews.ShowSongViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path("ui/", uiviews.index, name="index"),
+    path("ui/programs/", uiviews.programs, name="programs"),
+    path("ui/programs/<int:id>/", uiviews.program, name="program"),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]
