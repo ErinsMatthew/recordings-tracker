@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <h2>Seasons</h2>
+
+    {% if seasons %}
+    <ul>
+        {% for season in seasons %}
+        <li><a href="{% url 'season' season.id %}">{{ season.name }}</li></a>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>

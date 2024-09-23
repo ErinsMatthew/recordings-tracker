@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <h2>Show Platforms</h2>
+
+    {% if show_platforms %}
+    <ul>
+        {% for show_platform in show_platforms %}
+        <li><a href="{% url 'show_platform' show_platform.id %}">{{ show_platform.name }}</li></a>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>

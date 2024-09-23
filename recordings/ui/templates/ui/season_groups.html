@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <h2>Season Groups</h2>
+
+    {% if season_groups %}
+    <ul>
+        {% for season_group in season_groups %}
+        <li><a href="{% url 'season_group' season_group.id %}">{{ season_group.name }}</li></a>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>

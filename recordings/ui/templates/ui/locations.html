@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <h2>Locations</h2>
+
+    {% if locations %}
+    <ul>
+        {% for location in locations %}
+        <li><a href="{% url 'location' location.id %}">{{ location.name }}</li></a>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>

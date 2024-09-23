@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <h2>Shows</h2>
+
+    {% if shows %}
+    <ul>
+        {% for show in shows %}
+        <li><a href="{% url 'show' show.id %}">{{ show.name }}</li></a>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>

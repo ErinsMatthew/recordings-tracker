@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <h2>Equipment Types</h2>
+
+    {% if equipment_types %}
+    <ul>
+        {% for equipment_type in equipment_types %}
+        <li><a href="{% url 'equipment_type' equipment_type.id %}">{{ equipment_type.name }}</li></a>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>

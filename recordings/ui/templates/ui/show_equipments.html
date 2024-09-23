@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <h2>Show Equipments</h2>
+
+    {% if show_equipments %}
+    <ul>
+        {% for show_equipment in show_equipments %}
+        <li><a href="{% url 'show_equipment' show_equipment.id %}">{{ show_equipment.name }}</li></a>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <h2>Show Songs</h2>
+
+    {% if show_songs %}
+    <ul>
+        {% for show_song in show_songs %}
+        <li><a href="{% url 'show_song' show_song.id %}">{{ show_song.name }}</li></a>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>

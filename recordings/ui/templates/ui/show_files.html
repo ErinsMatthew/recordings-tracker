@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <h2>Show File</h2>
+
+    {% if show_files %}
+    <ul>
+        {% for show_file in show_files %}
+        <li><a href="{% url 'show_file' show_file.id %}">{{ show_file.name }}</li></a>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>
