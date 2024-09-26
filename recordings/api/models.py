@@ -58,10 +58,12 @@ class SeasonGroup(models.Model):
 
 
 class Show(models.Model):
-    name = models.CharField(max_length=128)
-    season_group = models.ForeignKey(SeasonGroup, on_delete=models.CASCADE)
-    date = models.DateField()
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    name = models.CharField(max_length=128, verbose_name="Show Name")
+    season_group = models.ForeignKey(
+        SeasonGroup, on_delete=models.CASCADE, verbose_name="Season Group"
+    )
+    date = models.DateField(verbose_name="Show Date")
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name="Show Location")
     recorded = models.BooleanField(default=False)
     comments = models.CharField(max_length=4096, default="")
     sequence = models.PositiveSmallIntegerField(null=True)
@@ -134,7 +136,7 @@ class ShowFile(models.Model):
     file_type = models.ForeignKey(FileType, on_delete=models.CASCADE)
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
     sequence = models.PositiveSmallIntegerField(null=True)
-    icloud_local_path = models.CharField(max_length=4096,default="")
+    icloud_local_path = models.CharField(max_length=4096, default="")
     icloud_url = models.URLField(default="")
     file_size = models.PositiveIntegerField()
     file_stats_json = models.JSONField()

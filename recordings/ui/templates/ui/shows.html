@@ -1,15 +1,15 @@
+{% load render_table from django_tables2 %}
+<!doctype html>
 <html>
 
-<body>
-    <h2>Shows</h2>
+<head>
+    <title>Shows</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
 
-    {% if shows %}
-    <ul>
-        {% for show in shows %}
-        <li><a href="{% url 'show' show.id %}">{{ show.name }}</li></a>
-        {% endfor %}
-    </ul>
-    {% endif %}
+<body>
+    {% render_table table %}
 </body>
 
 </html>

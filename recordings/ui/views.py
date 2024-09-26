@@ -1,5 +1,9 @@
 from django.shortcuts import render
 
+from django_tables2 import SingleTableView
+from api.models import Show
+from ui.tables import ShowTable
+from ui.forms import LocationForm
 from ui import services
 
 
@@ -26,9 +30,22 @@ def locations(request):
 
 
 def location(request, id):
-    location_obj = services.get_location(id)
 
-    return render(request, "ui/location.html", location_obj)
+    if request.method == "POST":
+        form = LocationForm(request.POST)
+
+        if form.is_valid():
+            location_obj = services.get_location(id)
+    else:
+        location_obj = services.get_location(id)
+
+        form = LocationForm(location_obj["location"])
+
+    return render(
+        request,
+        "ui/location.html",
+        {"form": form, "location": location_obj["location"]},
+    )
 
 
 def seasons(request):
@@ -54,6 +71,11 @@ def season_group(request, id):
 
     return render(request, "ui/season_group.html", season_group_obj)
 
+
+class ShowListView(SingleTableView):
+    model = Show
+    table_class = ShowTable
+    template_name = "ui/shows.html"
 
 def shows(request):
     shows_obj = services.get_shows()

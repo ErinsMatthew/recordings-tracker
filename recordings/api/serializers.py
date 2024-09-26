@@ -38,12 +38,18 @@ class SeasonSerializer(serializers.ModelSerializer):
 
 
 class SeasonGroupSerializer(serializers.ModelSerializer):
+    season = SeasonSerializer(read_only=True)
+
     class Meta:
         model = SeasonGroup
         fields = "__all__"
 
 
 class ShowSerializer(serializers.ModelSerializer):
+    full_name = serializers.ReadOnlyField()
+    season_group = SeasonGroupSerializer(read_only=True)
+    location = LocationSerializer(read_only=True)
+
     class Meta:
         model = Show
         fields = "__all__"

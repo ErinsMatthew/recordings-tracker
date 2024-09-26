@@ -6,7 +6,11 @@
     <h2>Location</h2>
 
     {% if location %}
-    {{ location.name }}
+    <form action="/locations/{{ location.id }}/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
     {% endif %}
 </body>
 

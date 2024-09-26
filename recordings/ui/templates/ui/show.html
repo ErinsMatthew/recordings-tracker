@@ -6,7 +6,16 @@
     <h2>Show</h2>
 
     {% if show %}
-    {{ show.name }}
+    {{ show.full_name }}
+
+    <!-- name = models.CharField(max_length=128)
+    season_group = models.ForeignKey(SeasonGroup, on_delete=models.CASCADE)
+    date = models.DateField()
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    recorded = models.BooleanField(default=False)
+    comments = models.CharField(max_length=4096, default="")
+    sequence = models.PositiveSmallIntegerField(null=True) -->
+
     {% endif %}
 </body>
 
